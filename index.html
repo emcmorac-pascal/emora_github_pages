@@ -1,0 +1,2277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EMora Technologies - Hub de Aplicaciones Profesionales</title>
+  <meta name="description" content="EMora Technologies - Desarrollo de aplicaciones móviles y soluciones tecnológicas. Descubre y prueba nuestras aplicaciones Mora KeyVault y Rosario/Coronilla en vivo.">
+  
+  <!-- Google Fonts: Outfit (headings) and Inter (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* variables de diseño premium */
+    :root {
+      --bg: #070b13;
+      --accent-blue: #3b82f6;
+      --accent-purple: #8b5cf6;
+      --accent-emerald: #10b981;
+      --accent-cyan: #06b6d4;
+      
+      --text-primary: #f4f7fb;
+      --text-secondary: #8b9bb4;
+      --text-muted: #5e6f8a;
+      
+      --card-bg: rgba(13, 22, 41, 0.6);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-border-hover: rgba(59, 130, 246, 0.4);
+      --card-bg-hover: rgba(16, 29, 54, 0.7);
+      
+      --glow-blue: rgba(59, 130, 246, 0.15);
+      --glow-purple: rgba(139, 92, 246, 0.15);
+      
+      --gradient-primary: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      --gradient-green: linear-gradient(135deg, var(--accent-emerald), var(--accent-cyan));
+      --gradient-dark: linear-gradient(135deg, #0d1629, #070b13);
+      --gradient-text: linear-gradient(135deg, #ffffff 30%, #a5b4fc 100%);
+      
+      --font-headings: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      
+      --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(30, 38, 64, 0.5) 0%, rgba(7, 11, 19, 0) 50%),
+        radial-gradient(circle at 100% 50%, rgba(139, 92, 246, 0.05) 0%, rgba(7, 11, 19, 0) 40%),
+        radial-gradient(circle at 0% 80%, rgba(16, 185, 129, 0.04) 0%, rgba(7, 11, 19, 0) 40%);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Patrón de cuadrícula de fondo sutil */
+    .bg-grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(rgba(255, 255, 255, 0.007) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255, 255, 255, 0.007) 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Header flotante con glassmorphism */
+    header {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 1200px;
+      background: rgba(13, 22, 41, 0.5);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      transition: var(--transition-smooth);
+    }
+
+    header.scrolled {
+      top: 0;
+      width: 100%;
+      max-width: 100%;
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
+      border-top: none;
+      background: rgba(7, 11, 19, 0.85);
+      padding: 14px 7%;
+    }
+
+    .brand {
+      font-family: var(--font-headings);
+      font-size: 1.4rem;
+      font-weight: 800;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo {
+      width: 28px;
+      height: 28px;
+      background: var(--gradient-primary);
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: var(--transition-smooth);
+      position: relative;
+      padding: 6px 0;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient-primary);
+      transition: var(--transition-smooth);
+    }
+
+    nav a:hover {
+      color: var(--text-primary);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .btn-nav {
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      color: var(--accent-blue);
+      padding: 8px 18px;
+      border-radius: 10px;
+      font-weight: 600;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-nav:hover {
+      background: var(--gradient-primary);
+      color: white;
+      border-color: transparent;
+      box-shadow: 0 0 15px rgba(139, 92, 246, 0.35);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      padding: 160px 7% 80px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 50px;
+      max-width: 1400px;
+      margin: 0 auto;
+      align-items: center;
+      position: relative;
+    }
+
+    .hero-content {
+      z-index: 10;
+    }
+
+    .badge-hero {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(139, 92, 246, 0.1);
+      border: 1px solid rgba(139, 92, 246, 0.2);
+      color: #c7d2fe;
+      padding: 6px 16px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+      letter-spacing: 0.5px;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent-purple);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent-purple);
+    }
+
+    h1 {
+      font-family: var(--font-headings);
+      font-size: 3.8rem;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      background: var(--gradient-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -1px;
+    }
+
+    .hero-desc {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      margin-bottom: 35px;
+      max-width: 600px;
+      font-weight: 300;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--gradient-primary);
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition-smooth);
+      box-shadow: 0 4px 20px rgba(59, 130, 246, 0.25);
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(139, 92, 246, 0.45);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-primary);
+      border: 1px solid var(--card-border);
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition-smooth);
+      cursor: pointer;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--text-secondary);
+      transform: translateY(-2px);
+    }
+
+    /* Ambient Glow behind simulator */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .ambient-glow {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, var(--glow-blue) 0%, rgba(7, 11, 19, 0) 70%);
+      border-radius: 50%;
+      z-index: -1;
+      filter: blur(20px);
+      animation: pulse-glow 8s ease-in-out infinite alternate;
+    }
+
+    /* Sección Apps (Portafolio) */
+    section {
+      padding: 100px 7%;
+      max-width: 1400px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title {
+      font-family: var(--font-headings);
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 15px;
+      background: var(--gradient-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section-subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+      font-weight: 300;
+    }
+
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+
+    .app-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 35px;
+      transition: var(--transition-smooth);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .app-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--gradient-primary);
+      opacity: 0;
+      transition: var(--transition-smooth);
+    }
+
+    .app-card.keyvault::before {
+      background: var(--gradient-primary);
+    }
+
+    .app-card.rosario::before {
+      background: var(--gradient-green);
+    }
+
+    .app-card:hover {
+      background: var(--card-bg-hover);
+      border-color: var(--card-border-hover);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .app-card:hover::before {
+      opacity: 1;
+    }
+
+    .app-icon-container {
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin-bottom: 24px;
+      box-shadow: inset 0 2px 5px rgba(255,255,255,0.1);
+    }
+
+    .app-card.keyvault .app-icon-container {
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      color: var(--accent-blue);
+    }
+
+    .app-card.rosario .app-icon-container {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: var(--accent-emerald);
+    }
+
+    .app-card.upcoming .app-icon-container {
+      background: rgba(94, 111, 138, 0.15);
+      border: 1px solid rgba(94, 111, 138, 0.3);
+      color: var(--text-muted);
+    }
+
+    .app-card h3 {
+      font-family: var(--font-headings);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .app-card p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 24px;
+      flex-grow: 1;
+    }
+
+    .app-features {
+      list-style: none;
+      margin-bottom: 30px;
+    }
+
+    .app-features li {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .app-features svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+
+    .app-card.keyvault .app-features svg {
+      color: var(--accent-blue);
+    }
+
+    .app-card.rosario .app-features svg {
+      color: var(--accent-emerald);
+    }
+
+    .app-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-card-primary {
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition-smooth);
+    }
+
+    .app-card.keyvault .btn-card-primary {
+      background: var(--accent-blue);
+      color: white;
+    }
+
+    .app-card.keyvault .btn-card-primary:hover {
+      background: #2563eb;
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+    }
+
+    .app-card.rosario .btn-card-primary {
+      background: var(--accent-emerald);
+      color: white;
+    }
+
+    .app-card.rosario .btn-card-primary:hover {
+      background: #059669;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+    }
+
+    .btn-card-secondary {
+      background: transparent;
+      border: 1px solid var(--card-border);
+      color: var(--text-secondary);
+      padding: 9px 18px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-card-secondary:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-primary);
+      border-color: var(--text-secondary);
+    }
+
+    /* Simulador de Teléfono (Smartphone Mockup) */
+    .phone-container {
+      width: 330px;
+      height: 660px;
+      background: #000;
+      border-radius: 46px;
+      border: 10px solid #282f42;
+      position: relative;
+      box-shadow: 
+        0 25px 60px rgba(0, 0, 0, 0.7),
+        0 0 0 2px rgba(255,255,255,0.05),
+        inset 0 0 10px rgba(255,255,255,0.1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Dynamic Island / Notch */
+    .phone-notch {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 110px;
+      height: 25px;
+      background: #000;
+      border-radius: 15px;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .camera-lens {
+      width: 8px;
+      height: 8px;
+      background: #111;
+      border-radius: 50%;
+      margin-left: auto;
+      margin-right: 15px;
+      box-shadow: inset 0 1px 3px rgba(255,255,255,0.2);
+    }
+
+    /* Barra de Estado */
+    .phone-status-bar {
+      height: 38px;
+      padding: 10px 24px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: white;
+      z-index: 999;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: transparent;
+      pointer-events: none;
+    }
+
+    .status-icons {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    /* Barra de Navegación de Inicio (Home Indicator) */
+    .phone-home-indicator {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.45);
+      border-radius: 2px;
+      z-index: 1000;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .phone-home-indicator:hover {
+      background: rgba(255, 255, 255, 0.8);
+      width: 130px;
+      height: 5px;
+    }
+
+    /* Pantalla Interna */
+    .phone-screen {
+      flex-grow: 1;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      background: #080c16;
+      overflow-y: auto;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      padding-top: 38px;
+      padding-bottom: 24px;
+    }
+
+    /* Scrollbar personalizado para el simulador */
+    .phone-screen::-webkit-scrollbar {
+      width: 4px;
+    }
+    .phone-screen::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+    }
+
+    /* Wallpaper de la pantalla de inicio */
+    .screen-home {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: radial-gradient(circle at 50% 30%, #151e3d 0%, #080c16 100%);
+      padding: 24px;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: center;
+    }
+
+    .screen-home .clock {
+      font-size: 2.2rem;
+      font-weight: 300;
+      margin-top: 15px;
+      margin-bottom: 2px;
+      color: white;
+      font-family: var(--font-headings);
+    }
+
+    .screen-home .date {
+      font-size: 0.75rem;
+      color: #93c5fd;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 45px;
+    }
+
+    .app-icon-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      width: 100%;
+    }
+
+    .simulator-app-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .simulator-app-icon:active {
+      transform: scale(0.9);
+    }
+
+    .app-icon-bg {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 6px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    }
+
+    .simulator-app-icon.keyvault .app-icon-bg {
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .simulator-app-icon.rosario .app-icon-bg {
+      background: linear-gradient(135deg, #059669, #0891b2);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .app-icon-label {
+      font-size: 0.65rem;
+      color: #cbd5e1;
+      font-weight: 500;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    /* Simulador de App: Mora KeyVault */
+    .app-view-keyvault {
+      display: none;
+      flex-direction: column;
+      height: 100%;
+      background: #090e1a;
+      color: #e2e8f0;
+      padding: 16px;
+      position: relative;
+    }
+
+    .kv-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding-bottom: 10px;
+    }
+
+    .kv-title {
+      font-family: var(--font-headings);
+      font-weight: 700;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #60a5fa;
+    }
+
+    .kv-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow-y: auto;
+      flex-grow: 1;
+      padding-bottom: 20px;
+    }
+
+    .kv-item {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 12px;
+      transition: var(--transition-smooth);
+      cursor: pointer;
+    }
+
+    .kv-item:hover {
+      background: rgba(59, 130, 246, 0.08);
+      border-color: rgba(59, 130, 246, 0.25);
+    }
+
+    .kv-item-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .kv-item-name {
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: white;
+    }
+
+    .kv-item-tag {
+      font-size: 0.65rem;
+      padding: 2px 6px;
+      background: rgba(59,130,246,0.2);
+      color: #93c5fd;
+      border-radius: 4px;
+    }
+
+    .kv-item-detail {
+      font-size: 0.75rem;
+      color: #94a3b8;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 4px;
+      background: rgba(0,0,0,0.2);
+      padding: 6px 8px;
+      border-radius: 6px;
+    }
+
+    .kv-copy-btn {
+      background: transparent;
+      border: none;
+      color: #60a5fa;
+      cursor: pointer;
+      font-size: 0.7rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .kv-copy-btn:hover {
+      color: #93c5fd;
+    }
+
+    .kv-btn-add {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 10px;
+      transition: var(--transition-smooth);
+    }
+
+    .kv-btn-add:hover {
+      background: #1d4ed8;
+    }
+
+    /* Modal Form de Agregar Clave */
+    .kv-form-overlay {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(7, 11, 19, 0.95);
+      z-index: 10;
+      padding: 16px;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .kv-form-title {
+      font-family: var(--font-headings);
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #60a5fa;
+    }
+
+    .kv-input-group {
+      margin-bottom: 10px;
+    }
+
+    .kv-input-group label {
+      display: block;
+      font-size: 0.65rem;
+      color: #94a3b8;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .kv-input-group input, .kv-input-group textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
+      padding: 6px 10px;
+      color: white;
+      font-size: 0.8rem;
+      font-family: inherit;
+    }
+
+    .kv-input-group input:focus {
+      outline: none;
+      border-color: #2563eb;
+    }
+
+    .kv-form-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .kv-form-btn-save {
+      flex-grow: 1;
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 8px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .kv-form-btn-cancel {
+      flex-grow: 1;
+      background: rgba(255,255,255,0.1);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 8px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+
+    /* Simulador de App: Rosario / Coronilla */
+    .app-view-rosario {
+      display: none;
+      flex-direction: column;
+      height: 100%;
+      background: #051412;
+      color: #e2f1ee;
+      padding: 16px;
+      position: relative;
+    }
+
+    .ros-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding-bottom: 8px;
+    }
+
+    .ros-title {
+      font-family: var(--font-headings);
+      font-weight: 700;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #10b981;
+    }
+
+    /* Selector de Rosario o Coronilla */
+    .ros-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      justify-content: center;
+      height: 100%;
+    }
+
+    .ros-menu-btn {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 12px;
+      padding: 18px;
+      color: #a7f3d0;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .ros-menu-btn:hover {
+      background: rgba(16, 185, 129, 0.2);
+      border-color: #10b981;
+      transform: translateY(-2px);
+    }
+
+    .ros-menu-btn h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .ros-menu-btn p {
+      font-size: 0.7rem;
+      color: #6ee7b7;
+    }
+
+    /* Interfaz de Rezo */
+    .ros-prayer-view {
+      display: none;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .ros-mystery-info {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 10px;
+      padding: 10px;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .ros-mystery-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #34d399;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .ros-mystery-desc {
+      font-size: 0.7rem;
+      color: #94a3b8;
+      margin-top: 2px;
+    }
+
+    .ros-bead-visualizer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      margin: 10px 0;
+      flex-wrap: wrap;
+    }
+
+    .ros-bead {
+      width: 10px;
+      height: 10px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 50%;
+      transition: var(--transition-smooth);
+    }
+
+    .ros-bead.active {
+      background: #10b981;
+      box-shadow: 0 0 8px #10b981;
+      transform: scale(1.2);
+    }
+
+    .ros-bead.completed {
+      background: rgba(16, 185, 129, 0.4);
+    }
+
+    .ros-current-bead {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #cbd5e1;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .ros-prayer-card {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      padding: 12px;
+      font-size: 0.75rem;
+      line-height: 1.5;
+      text-align: center;
+      flex-grow: 1;
+      overflow-y: auto;
+      margin-bottom: 12px;
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+
+    .ros-prayer-title {
+      font-weight: 700;
+      color: #a7f3d0;
+      margin-bottom: 6px;
+      font-size: 0.8rem;
+    }
+
+    .ros-btn-action {
+      background: #10b981;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      box-shadow: 0 4px 10px rgba(16, 185, 129, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .ros-btn-action:hover {
+      background: #059669;
+    }
+
+    .ros-btn-back {
+      background: transparent;
+      border: none;
+      color: #6ee7b7;
+      cursor: pointer;
+      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Alerta de notificación flotante dentro del celular */
+    .phone-toast {
+      position: absolute;
+      top: 60px;
+      left: 10px;
+      right: 10px;
+      background: rgba(13, 22, 41, 0.95);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 0.75rem;
+      text-align: center;
+      color: white;
+      z-index: 1000;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      transform: translateY(-100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+      pointer-events: none;
+    }
+
+    .phone-toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* Simulator Panel Controls */
+    .simulator-control-panel {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: fit-content;
+    }
+
+    .simulator-control-panel h3 {
+      font-family: var(--font-headings);
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+    }
+
+    .simulator-control-panel p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+
+    .app-select-row {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .btn-select-app {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 14px 20px;
+      color: var(--text-primary);
+      text-align: left;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-select-app:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: var(--text-secondary);
+    }
+
+    .btn-select-app.active {
+      background: rgba(59, 130, 246, 0.1);
+      border-color: var(--accent-blue);
+      color: #93c5fd;
+    }
+
+    .btn-select-app.active.rosario {
+      background: rgba(16, 185, 129, 0.1);
+      border-color: var(--accent-emerald);
+      color: #a7f3d0;
+    }
+
+    /* Sección de Valores (Compromiso) */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .value-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 30px;
+      transition: var(--transition-smooth);
+    }
+
+    .value-card:hover {
+      border-color: var(--card-border-hover);
+      background: var(--card-bg-hover);
+      transform: translateY(-4px);
+    }
+
+    .value-card-icon {
+      font-size: 1.8rem;
+      margin-bottom: 16px;
+    }
+
+    .value-card h3 {
+      font-family: var(--font-headings);
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+    }
+
+    .value-card p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    /* Sección de Contacto */
+    .contact-container {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 28px;
+      padding: 50px;
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-container::after {
+      content: '';
+      position: absolute;
+      bottom: -100px;
+      right: -100px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.05) 0%, rgba(7, 11, 19, 0) 70%);
+      z-index: -1;
+      border-radius: 50%;
+    }
+
+    .contact-info h3 {
+      font-family: var(--font-headings);
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+    }
+
+    .contact-info p {
+      color: var(--text-secondary);
+      margin-bottom: 30px;
+      font-size: 0.95rem;
+    }
+
+    .email-box {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .email-text {
+      font-family: monospace;
+      font-size: 0.95rem;
+      color: #93c5fd;
+      user-select: all;
+    }
+
+    .btn-copy {
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      color: var(--accent-blue);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-copy:hover {
+      background: var(--accent-blue);
+      color: white;
+      box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+    }
+
+    .btn-copy.copied {
+      background: var(--accent-emerald);
+      color: white;
+      border-color: transparent;
+    }
+
+    /* Formulario de Soporte */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .form-group input, .form-group textarea {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      color: white;
+      font-family: inherit;
+      font-size: 0.9rem;
+      transition: var(--transition-smooth);
+    }
+
+    .form-group input:focus, .form-group textarea:focus {
+      outline: none;
+      border-color: var(--accent-blue);
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px 7%;
+      background: #04070d;
+      border-top: 1px solid var(--card-border);
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: var(--transition-smooth);
+    }
+
+    .footer-links a:hover {
+      color: var(--text-primary);
+    }
+
+    /* Animaciones */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    @keyframes pulse-glow {
+      0% { transform: scale(1); opacity: 0.8; }
+      100% { transform: scale(1.1); opacity: 1; }
+    }
+
+    /* Responsividad */
+    @media (max-width: 1024px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 120px;
+        text-align: center;
+        gap: 60px;
+      }
+      .hero-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      h1 {
+        font-size: 3rem;
+      }
+      .hero-buttons {
+        justify-content: center;
+      }
+      .contact-container {
+        grid-template-columns: 1fr;
+        padding: 35px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 12px 20px;
+      }
+      nav {
+        display: none; /* Simplificado para móviles */
+      }
+      .apps-grid {
+        grid-template-columns: 1fr;
+      }
+      h1 {
+        font-size: 2.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cuadrícula de fondo -->
+  <div class="bg-grid"></div>
+
+  <!-- Cabecera -->
+  <header id="header">
+    <div class="brand">
+      <div class="brand-logo">E</div>
+      EMora Technologies
+    </div>
+    <nav>
+      <a href="#hero">Inicio</a>
+      <a href="#apps">Aplicaciones</a>
+      <a href="#simulador">Simulador en vivo</a>
+      <a href="privacy.html">Privacidad</a>
+      <a href="terms.html">Términos</a>
+      <a href="#contacto" class="btn-nav">Contacto</a>
+    </nav>
+  </header>
+
+  <!-- Principal -->
+  <main>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+      <div class="hero-content">
+        <span class="badge-hero">
+          <span class="badge-dot"></span>
+          Desarrollo Móvil e Innovación Local
+        </span>
+        <h1>Tecnología limpia, segura y con un propósito.</h1>
+        <p class="hero-desc">
+          Creamos aplicaciones móviles de alto valor que respetan tu privacidad. Gestiona tus contraseñas locales o conéctate espiritualmente con nuestras herramientas avanzadas.
+        </p>
+        <div class="hero-buttons">
+          <a href="#simulador" class="btn-primary">
+            Probar simulador
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+          <a href="#apps" class="btn-secondary">Ver Aplicaciones</a>
+        </div>
+      </div>
+      
+      <div class="hero-visual">
+        <div class="ambient-glow"></div>
+        <!-- Teléfono Simulator en el Hero -->
+        <div class="phone-container">
+          <div class="phone-notch">
+            <div class="camera-lens"></div>
+          </div>
+          <div class="phone-status-bar">
+            <span id="sim-time">17:54</span>
+            <div class="status-icons">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.17 19.58 10.53 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 15c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm-1-8h2v5h-2zm0-3h2v2h-2z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
+            </div>
+          </div>
+          
+          <!-- Notificación interna en el cel -->
+          <div id="sim-toast" class="phone-toast">Copiado al portapapeles de la demo</div>
+
+          <div class="phone-screen" id="sim-screen">
+            <!-- Cargado dinámicamente con JS -->
+          </div>
+          <div class="phone-home-indicator" onclick="goHome()"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Apps Section -->
+    <section id="apps">
+      <div class="section-header">
+        <h2 class="section-title">Nuestras Aplicaciones</h2>
+        <p class="section-subtitle">Soluciones funcionales construidas con altos estándares de seguridad y experiencia de usuario.</p>
+      </div>
+
+      <div class="apps-grid">
+        <!-- App 1: KeyVault -->
+        <div class="app-card keyvault">
+          <div class="app-icon-container">🔐</div>
+          <h3>Mora KeyVault</h3>
+          <p>La bóveda digital más segura en tu bolsillo. Almacena tus cuentas, credenciales, contraseñas, direcciones IP de servidores y anotaciones de forma 100% cifrada y offline en tu dispositivo.</p>
+          <ul class="app-features">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Almacenamiento Local Cifrado
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Gestor de Servidores & IPs
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Cero cookies, Cero nube
+            </li>
+          </ul>
+          <div class="app-actions">
+            <button onclick="launchApp('keyvault')" class="btn-card-primary">Ejecutar en Simulador</button>
+            <a href="privacy.html" class="btn-card-secondary">Privacidad</a>
+          </div>
+        </div>
+
+        <!-- App 2: Rosario / Coronilla -->
+        <div class="app-card rosario">
+          <div class="app-icon-container">🙏</div>
+          <h3>Rosario y Coronilla</h3>
+          <p>Tu asistente espiritual en el día a día. Reza el Santo Rosario y la Coronilla de la Divina Misericordia con una interfaz interactiva de cuentas táctiles, misterios automáticos por día y bellas animaciones.</p>
+          <ul class="app-features">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Seguimiento Táctil e Interactivo
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Misterios Diarios del Rosario
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Rezo Completo de la Coronilla
+            </li>
+          </ul>
+          <div class="app-actions">
+            <button onclick="launchApp('rosario')" class="btn-card-primary">Ejecutar en Simulador</button>
+            <a href="privacy.html" class="btn-card-secondary">Privacidad</a>
+          </div>
+        </div>
+
+        <!-- App 3: Próximos Proyectos -->
+        <div class="app-card upcoming">
+          <div class="app-icon-container">🚀</div>
+          <h3>Nuevos Proyectos</h3>
+          <p>Pronto expandiremos nuestro catálogo con más aplicaciones enfocadas en productividad técnica, utilidades seguras de red e interactividad católico-espiritual.</p>
+          <ul class="app-features">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Optimizaciones de Seguridad
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Arquitecturas Offline-first
+            </li>
+          </ul>
+          <div class="app-actions">
+            <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">EN DESARROLLO</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Simulador en Vivo Centralizado -->
+    <section id="simulador" style="background: rgba(13, 22, 41, 0.2); border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border);">
+      <div class="section-header">
+        <h2 class="section-title">Consola de Simulación Interactiva</h2>
+        <p class="section-subtitle">No te quedes solo con la descripción. Interactúa y prueba las capacidades principales de nuestras aplicaciones directamente aquí.</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 50px; align-items: center;">
+        <div class="simulator-control-panel">
+          <h3>Panel de Control</h3>
+          <p>Haz clic en cualquiera de nuestras aplicaciones para cargar su interfaz adaptada de simulación interactiva dentro del dispositivo móvil virtual de la derecha.</p>
+          <div class="app-select-row">
+            <button id="ctrl-keyvault" onclick="launchApp('keyvault')" class="btn-select-app">
+              <span>🔐 Mora KeyVault (Bóveda Segura)</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+            <button id="ctrl-rosario" onclick="launchApp('rosario')" class="btn-select-app">
+              <span>🙏 Rosario / Coronilla (Oración)</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+          
+          <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid var(--card-border); font-size: 0.85rem; color: var(--text-secondary);">
+            <strong>¿Cómo funciona?</strong> La simulación interactiva se ejecuta por completo en tu navegador de manera privada. Los datos creados no se transmiten a ningún servidor externo.
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: center;">
+          <!-- El teléfono se mantiene visible -->
+          <div style="padding: 10px; background: radial-gradient(circle, rgba(99,102,241,0.05) 0%, transparent 80%); border-radius: 50%;">
+            <!-- Copia espejo del teléfono de simulación -->
+            <div id="simulator-phone-anchor"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Compromiso y Valores -->
+    <section>
+      <div class="section-header">
+        <h2 class="section-title">Nuestro Compromiso</h2>
+        <p class="section-subtitle">La ética en el desarrollo de software es nuestra prioridad fundamental.</p>
+      </div>
+
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-card-icon">🛡️</div>
+          <h3>Privacidad Garantizada</h3>
+          <p>No recopilamos telemetría innecesaria. Toda tu información sensible permanece cifrada localmente y bajo tu propio control.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-card-icon">⚡</div>
+          <h3>Simplicidad y Fluidez</h3>
+          <p>Evitamos interfaces cargadas de publicidad molesta o animaciones lentas. Buscamos un diseño directo que resuelva tus problemas rápidamente.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-card-icon">🔄</div>
+          <h3>Evolución Constante</h3>
+          <p>Escuchamos a nuestros usuarios para lanzar actualizaciones continuas que mejoren la estabilidad, incorporen funcionalidades y robustezcan la seguridad.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección Contacto -->
+    <section id="contacto">
+      <div class="section-header">
+        <h2 class="section-title">Contáctanos</h2>
+        <p class="section-subtitle">¿Tienes alguna pregunta, sugerencia o requieres soporte para alguna aplicación?</p>
+      </div>
+
+      <div class="contact-container">
+        <div class="contact-info">
+          <h3>Escríbenos directamente</h3>
+          <p>Puedes enviarnos un correo electrónico o copiar la dirección de contacto con un solo clic. Te responderemos en un plazo máximo de 24 horas laborables.</p>
+          
+          <div class="email-box">
+            <span class="email-text" id="email-addr">emoratechnologies@gmail.com</span>
+            <button class="btn-copy" onclick="copyEmail()" id="btn-copy-el">
+              <svg id="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <svg id="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span id="copy-text">Copiar correo</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="contact-form-wrapper">
+          <div class="contact-form">
+            <div class="form-group">
+              <input type="text" id="contact-name" placeholder="Tu nombre" required>
+            </div>
+            <div class="form-group">
+              <input type="email" id="contact-email" placeholder="Tu correo electrónico" required>
+            </div>
+            <div class="form-group">
+              <textarea id="contact-message" rows="4" placeholder="¿En qué podemos ayudarte?" required></textarea>
+            </div>
+            <button onclick="sendMockFeedback()" class="btn-primary" style="justify-content: center; width: 100%;">Enviar mensaje</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-links">
+      <a href="privacy.html">Política de Privacidad</a>
+      <a href="terms.html">Términos de Servicio</a>
+    </div>
+    <p>© 2026 EMora Technologies. Todos los derechos reservados. Desarrollado con excelencia técnica.</p>
+  </footer>
+
+  <script>
+    // Configuración del Header Scrolled
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Control de tiempo dinámico en el simulador
+    function updateClock() {
+      const timeEl = document.getElementById('sim-time');
+      if (timeEl) {
+        const now = new Date();
+        const hrs = String(now.getHours()).padStart(2, '0');
+        const mins = String(now.getMinutes()).padStart(2, '0');
+        timeEl.textContent = `${hrs}:${mins}`;
+      }
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Copiar correo al portapapeles
+    function copyEmail() {
+      const email = document.getElementById('email-addr').textContent;
+      navigator.clipboard.writeText(email).then(() => {
+        const btn = document.getElementById('btn-copy-el');
+        const copyIcon = document.getElementById('copy-icon');
+        const checkIcon = document.getElementById('check-icon');
+        const copyText = document.getElementById('copy-text');
+
+        btn.classList.add('copied');
+        copyIcon.style.display = 'none';
+        checkIcon.style.display = 'inline';
+        copyText.textContent = '¡Copiado!';
+
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          copyIcon.style.display = 'inline';
+          checkIcon.style.display = 'none';
+          copyText.textContent = 'Copiar correo';
+        }, 2500);
+      });
+    }
+
+    // Feedback del envío de formulario
+    function sendMockFeedback() {
+      const name = document.getElementById('contact-name').value;
+      const email = document.getElementById('contact-email').value;
+      const msg = document.getElementById('contact-message').value;
+
+      if (!name || !email || !msg) {
+        alert("Por favor, rellena todos los campos.");
+        return;
+      }
+
+      alert(`¡Gracias, ${name}! Tu mensaje ha sido enviado correctamente. Nos pondremos en contacto contigo en ${email}.`);
+      document.getElementById('contact-name').value = '';
+      document.getElementById('contact-email').value = '';
+      document.getElementById('contact-message').value = '';
+    }
+
+    // ==========================================
+    // LOGICA DEL SIMULADOR DE APLICACIONES (JS)
+    // ==========================================
+    
+    // Datos por defecto de Mora KeyVault (guardados en sessionStorage)
+    const defaultKeys = [
+      { id: 1, name: "Servidor Web Nginx", user: "admin_emora", pass: "K9$mP2!x8Q", tag: "Servidor", ip: "192.168.1.45", notes: "Clave maestra del servidor web de hosting principal." },
+      { id: 2, name: "Base de Datos Prod", user: "db_user", pass: "T#7vW_9qYp", tag: "Base de datos", ip: "10.0.8.21", notes: "Solo accesible desde la VPN interna de desarrollo." },
+      { id: 3, name: "GitLab Repositorio", user: "emoratech", pass: "ghP_x88ZpLwQ2", tag: "Desarrollo", ip: "N/A", notes: "Token de acceso personal con permisos de lectura/escritura." }
+    ];
+
+    if (!sessionStorage.getItem('kv_data')) {
+      sessionStorage.setItem('kv_data', JSON.stringify(defaultKeys));
+    }
+
+    let activeSimApp = null; // 'keyvault' o 'rosario'
+
+    // Plantillas de vistas de pantalla
+    const views = {
+      home: `
+        <div class="screen-home">
+          <div class="clock" id="home-clock">12:00</div>
+          <div class="date" id="home-date">Domingo, 28 de Junio</div>
+          
+          <div class="app-icon-grid">
+            <div class="simulator-app-icon keyvault" onclick="launchApp('keyvault')">
+              <div class="app-icon-bg">🔐</div>
+              <span class="app-icon-label">KeyVault</span>
+            </div>
+            <div class="simulator-app-icon rosario" onclick="launchApp('rosario')">
+              <div class="app-icon-bg">🙏</div>
+              <span class="app-icon-label">Oración</span>
+            </div>
+          </div>
+        </div>
+      `,
+      keyvault: `
+        <div class="app-view-keyvault" style="display:flex;">
+          <div class="kv-header">
+            <span class="kv-title">🔐 Mora KeyVault</span>
+            <button class="ros-btn-back" onclick="goHome()">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+              Salir
+            </button>
+          </div>
+          <div class="kv-list" id="kv-keys-container">
+            <!-- Cargado con JS -->
+          </div>
+          <button class="kv-btn-add" onclick="showAddKeyForm()">
+            + Nueva Credencial
+          </button>
+
+          <!-- Formulario Overlay -->
+          <div class="kv-form-overlay" id="kv-form-add">
+            <div class="kv-form-title">Agregar Credencial</div>
+            <div class="kv-input-group">
+              <label>Nombre del servicio</label>
+              <input type="text" id="add-kv-name" placeholder="Ej. Panel Host" required>
+            </div>
+            <div class="kv-input-group">
+              <label>Categoría</label>
+              <input type="text" id="add-kv-tag" placeholder="Ej. Servidor, Web" required>
+            </div>
+            <div class="kv-input-group">
+              <label>Usuario</label>
+              <input type="text" id="add-kv-user" placeholder="Ej. root" required>
+            </div>
+            <div class="kv-input-group">
+              <label>Contraseña</label>
+              <input type="text" id="add-kv-pass" placeholder="Ingresa contraseña" required>
+            </div>
+            <div class="kv-input-group">
+              <label>Dirección IP (Opcional)</label>
+              <input type="text" id="add-kv-ip" placeholder="Ej. 192.168.0.1">
+            </div>
+            <div class="kv-input-group">
+              <label>Notas adicionales</label>
+              <textarea id="add-kv-notes" rows="2" placeholder="Detalles extra..."></textarea>
+            </div>
+            <div class="kv-form-actions">
+              <button class="kv-form-btn-save" onclick="saveNewKey()">Guardar</button>
+              <button class="kv-form-btn-cancel" onclick="hideAddKeyForm()">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      `,
+      rosario: `
+        <div class="app-view-rosario" style="display:flex;">
+          <div class="ros-header">
+            <span class="ros-title">🙏 Rezo Guiado</span>
+            <button class="ros-btn-back" onclick="goHome()">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+              Salir
+            </button>
+          </div>
+
+          <!-- Selector principal -->
+          <div class="ros-menu" id="ros-main-menu">
+            <div class="ros-menu-btn" onclick="startPrayer('rosario')">
+              <h4>Santo Rosario</h4>
+              <p>Misterios del día, Ave Marías y meditaciones.</p>
+            </div>
+            <div class="ros-menu-btn" onclick="startPrayer('coronilla')">
+              <h4>Coronilla de la Misericordia</h4>
+              <p>Rezo cantado o meditado del perdón.</p>
+            </div>
+          </div>
+
+          <!-- Interfaz de Rezo Activa -->
+          <div class="ros-prayer-view" id="ros-active-view">
+            <div class="ros-mystery-info">
+              <div class="ros-mystery-title" id="ros-prayer-header">MISTERIOS GLORIOSOS</div>
+              <div class="ros-mystery-desc" id="ros-prayer-subheader">Decena 1: La Resurrección del Señor</div>
+            </div>
+
+            <div class="ros-bead-visualizer" id="ros-beads-container">
+              <!-- Cuentas interactivas cargadas con JS -->
+            </div>
+
+            <div class="ros-current-bead" id="ros-bead-counter">Cuenta 1 / 10</div>
+
+            <div class="ros-prayer-card">
+              <div class="ros-prayer-title" id="ros-card-title">Ave María</div>
+              <p id="ros-card-text">Dios te salve, María, llena eres de gracia, el Señor es contigo. Bendita tú eres entre todas las mujeres...</p>
+            </div>
+
+            <button class="ros-btn-action" onclick="advanceBead()">
+              <span>Siguiente Cuenta</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+
+            <button class="ros-btn-back" style="margin-top: 12px; align-self: center;" onclick="resetToRosMenu()">
+              Volver al menú de oraciones
+            </button>
+          </div>
+        </div>
+      `
+    };
+
+    // Inicializar simulador en pantalla de inicio
+    const screenEl = document.getElementById('sim-screen');
+    
+    function goHome() {
+      activeSimApp = null;
+      screenEl.innerHTML = views.home;
+      updateHomeClock();
+      
+      // Actualizar botones de control del panel lateral
+      document.querySelectorAll('.btn-select-app').forEach(btn => btn.classList.remove('active'));
+    }
+
+    // Mantener la hora de la pantalla de inicio actualizada
+    function updateHomeClock() {
+      const homeClock = document.getElementById('home-clock');
+      const homeDate = document.getElementById('home-date');
+      if (homeClock && homeDate) {
+        const now = new Date();
+        const hrs = String(now.getHours()).padStart(2, '0');
+        const mins = String(now.getMinutes()).padStart(2, '0');
+        homeClock.textContent = `${hrs}:${mins}`;
+
+        const options = { weekday: 'long', day: 'numeric', month: 'long' };
+        homeDate.textContent = now.toLocaleDateString('es-ES', options);
+      }
+    }
+    
+    setInterval(updateHomeClock, 1000);
+
+    // Lanzar App desde el portal o el simulador
+    function launchApp(appName) {
+      activeSimApp = appName;
+      
+      // Aseguramos que la pantalla se cargue
+      screenEl.innerHTML = views[appName];
+
+      // Sincronizar clases en botones del panel de control
+      document.querySelectorAll('.btn-select-app').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = document.getElementById(`ctrl-${appName}`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      // Inicializar lógicas de aplicación
+      if (appName === 'keyvault') {
+        renderKeyVaultList();
+      } else if (appName === 'rosario') {
+        resetToRosMenu();
+      }
+
+      // Hacer scroll suave hacia el simulador si el click vino del portafolio superior
+      const simuladorSection = document.getElementById('simulador');
+      const bounding = simuladorSection.getBoundingClientRect();
+      if (bounding.top < 0 || bounding.bottom > window.innerHeight) {
+        simuladorSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    // Muestra alerta tostada dentro del celular
+    function showPhoneToast(message) {
+      const toast = document.getElementById('sim-toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2000);
+    }
+
+    // ==========================================
+    // LOGICA: KEYVAULT SIMULATOR APP
+    // ==========================================
+    function renderKeyVaultList() {
+      const container = document.getElementById('kv-keys-container');
+      if (!container) return;
+
+      const keys = JSON.parse(sessionStorage.getItem('kv_data')) || [];
+      
+      if (keys.length === 0) {
+        container.innerHTML = `<div style="text-align:center;color:var(--text-muted);font-size:0.8rem;padding:30px 10px;">La bóveda está vacía. Añade una credencial.</div>`;
+        return;
+      }
+
+      container.innerHTML = keys.map(key => `
+        <div class="kv-item">
+          <div class="kv-item-top">
+            <span class="kv-item-name">${escapeHTML(key.name)}</span>
+            <span class="kv-item-tag">${escapeHTML(key.tag)}</span>
+          </div>
+          <div style="font-size:0.75rem; color:#94a3b8; margin-bottom:4px;">
+            👤 ${escapeHTML(key.user)}
+          </div>
+          <div class="kv-item-detail">
+            <span>🔑 ••••••••</span>
+            <button class="kv-copy-btn" onclick="copyKeyPassword('${escapeHTML(key.pass)}')">
+              📋 Copiar
+            </button>
+          </div>
+          ${key.ip !== 'N/A' && key.ip ? `
+            <div style="font-size:0.7rem; color:#60a5fa; margin-top:6px;">
+              🌐 IP: ${escapeHTML(key.ip)}
+            </div>
+          ` : ''}
+          ${key.notes ? `
+            <div style="font-size:0.68rem; color:var(--text-muted); margin-top:4px; font-style:italic;">
+              Nota: ${escapeHTML(key.notes)}
+            </div>
+          ` : ''}
+        </div>
+      `).join('');
+    }
+
+    function showAddKeyForm() {
+      document.getElementById('kv-form-add').style.display = 'flex';
+    }
+
+    function hideAddKeyForm() {
+      document.getElementById('kv-form-add').style.display = 'none';
+      // Limpiar inputs
+      document.getElementById('add-kv-name').value = '';
+      document.getElementById('add-kv-tag').value = '';
+      document.getElementById('add-kv-user').value = '';
+      document.getElementById('add-kv-pass').value = '';
+      document.getElementById('add-kv-ip').value = '';
+      document.getElementById('add-kv-notes').value = '';
+    }
+
+    function saveNewKey() {
+      const name = document.getElementById('add-kv-name').value;
+      const tag = document.getElementById('add-kv-tag').value;
+      const user = document.getElementById('add-kv-user').value;
+      const pass = document.getElementById('add-kv-pass').value;
+      const ip = document.getElementById('add-kv-ip').value || 'N/A';
+      const notes = document.getElementById('add-kv-notes').value;
+
+      if (!name || !tag || !user || !pass) {
+        showPhoneToast("Rellena los campos obligatorios");
+        return;
+      }
+
+      const keys = JSON.parse(sessionStorage.getItem('kv_data')) || [];
+      const newKey = {
+        id: Date.now(),
+        name,
+        tag,
+        user,
+        pass,
+        ip,
+        notes
+      };
+
+      keys.push(newKey);
+      sessionStorage.setItem('kv_data', JSON.stringify(keys));
+
+      hideAddKeyForm();
+      renderKeyVaultList();
+      showPhoneToast("Credencial guardada localmente");
+    }
+
+    function copyKeyPassword(password) {
+      navigator.clipboard.writeText(password).then(() => {
+        showPhoneToast("Contraseña copiada al portapapeles");
+      });
+    }
+
+    // Helper contra inyección
+    function escapeHTML(str) {
+      return str.replace(/[&<>'"]/g, 
+        tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+      );
+    }
+
+    // ==========================================
+    // LOGICA: ROSARIO / CORONILLA SIMULATOR APP
+    // ==========================================
+    let prayerState = {
+      type: null,        // 'rosario' o 'coronilla'
+      beadIndex: 0,      // 0 a maxBeads
+      maxBeads: 10,      // En rosario simulamos una decena interactiva para fines del demo, o 50 para coronilla
+      decadeIndex: 1,    // 1 a 5
+    };
+
+    const rosaryDecades = [
+      "1ª Decena: La Resurrección del Hijo de Dios",
+      "2ª Decena: La Ascensión del Señor a los Cielos",
+      "3ª Decena: La Venida del Espíritu Santo en Pentecostés",
+      "4ª Decena: La Asunción de la Virgen María al Cielo",
+      "5ª Decena: La Coronación de María como Reina de la Creación"
+    ];
+
+    const prayers = {
+      padrenuestro: {
+        title: "Padre Nuestro",
+        text: "Padre nuestro que estás en el cielo, santificado sea tu Nombre; venga a nosotros tu Reino; hágase tu voluntad en la tierra como en el cielo. Danos hoy nuestro pan de cada día; perdona nuestras ofensas..."
+      },
+      avemaria: {
+        title: "Ave María",
+        text: "Dios te salve, María, llena eres de gracia, el Señor es contigo. Bendita tú eres entre todas las mujeres, y bendito es el fruto de tu vientre, Jesús. Santa María, Madre de Dios..."
+      },
+      gloria: {
+        title: "Gloria al Padre",
+        text: "Gloria al Padre, y al Hijo, y al Espíritu Santo. Como era en el principio, ahora y siempre, por los siglos de los siglos. Amén."
+      },
+      paterno: {
+        title: "Padre Eterno (Coronilla)",
+        text: "Padre Eterno, te ofrezco el Cuerpo y la Sangre, el Alma y la Divinidad de tu Amadísimo Hijo, nuestro Señor Jesucristo, como propiciación de nuestros pecados y los del mundo entero."
+      },
+      pasion: {
+        title: "Por su dolorosa Pasión",
+        text: "Ten misericordia de nosotros y del mundo entero."
+      },
+      santodios: {
+        title: "Santo Dios, Santo Fuerte",
+        text: "Santo Dios, Santo Fuerte, Santo Inmortal, ten misericordia de nosotros y del mundo entero. (x3)"
+      }
+    };
+
+    function resetToRosMenu() {
+      document.getElementById('ros-main-menu').style.display = 'flex';
+      document.getElementById('ros-active-view').style.display = 'none';
+    }
+
+    function startPrayer(type) {
+      prayerState.type = type;
+      prayerState.beadIndex = 0;
+      prayerState.decadeIndex = 1;
+
+      document.getElementById('ros-main-menu').style.display = 'none';
+      document.getElementById('ros-active-view').style.display = 'flex';
+
+      if (type === 'rosario') {
+        prayerState.maxBeads = 12; // 1 Padre nuestro + 10 Ave Marias + 1 Gloria
+        setupRosaryBeadsUI();
+      } else {
+        prayerState.maxBeads = 11; // 1 Padre Eterno + 10 misericordias
+        setupCoronillaBeadsUI();
+      }
+      updatePrayerText();
+    }
+
+    function setupRosaryBeadsUI() {
+      const container = document.getElementById('ros-beads-container');
+      // 1 cuenta grande (Padre nuestro) + 10 pequeñas (Ave marias) + 1 grande (Gloria)
+      container.innerHTML = `
+        <div class="ros-bead" id="bead-0" style="width:14px; height:14px; background: #eab308;"></div>
+        ${Array.from({length: 10}, (_, i) => `<div class="ros-bead" id="bead-${i+1}"></div>`).join('')}
+        <div class="ros-bead" id="bead-11" style="width:14px; height:14px; background: #3b82f6;"></div>
+      `;
+      updateBeadsHighlight();
+    }
+
+    function setupCoronillaBeadsUI() {
+      const container = document.getElementById('ros-beads-container');
+      // 1 Padre Eterno + 10 cuentas pequeñas
+      container.innerHTML = `
+        <div class="ros-bead" id="bead-0" style="width:14px; height:14px; background: #ef4444;"></div>
+        ${Array.from({length: 10}, (_, i) => `<div class="ros-bead" id="bead-${i+1}"></div>`).join('')}
+      `;
+      updateBeadsHighlight();
+    }
+
+    function updateBeadsHighlight() {
+      for (let i = 0; i <= prayerState.maxBeads; i++) {
+        const bead = document.getElementById(`bead-${i}`);
+        if (!bead) continue;
+        bead.className = 'ros-bead'; // reset
+        if (i === prayerState.beadIndex) {
+          bead.classList.add('active');
+        } else if (i < prayerState.beadIndex) {
+          bead.classList.add('completed');
+        }
+      }
+    }
+
+    function updatePrayerText() {
+      const header = document.getElementById('ros-prayer-header');
+      const subheader = document.getElementById('ros-prayer-subheader');
+      const counter = document.getElementById('ros-bead-counter');
+      const cardTitle = document.getElementById('ros-card-title');
+      const cardText = document.getElementById('ros-card-text');
+
+      if (prayerState.type === 'rosario') {
+        header.textContent = "MISTERIOS GLORIOSOS";
+        subheader.textContent = rosaryDecades[prayerState.decadeIndex - 1];
+        
+        if (prayerState.beadIndex === 0) {
+          counter.textContent = "Intro: Padre Nuestro";
+          cardTitle.textContent = prayers.padrenuestro.title;
+          cardText.textContent = prayers.padrenuestro.text;
+        } else if (prayerState.beadIndex === 11) {
+          counter.textContent = "Cierre: Gloria al Padre";
+          cardTitle.textContent = prayers.gloria.title;
+          cardText.textContent = prayers.gloria.text;
+        } else {
+          counter.textContent = `Ave María: Cuenta ${prayerState.beadIndex} / 10`;
+          cardTitle.textContent = prayers.avemaria.title;
+          cardText.textContent = prayers.avemaria.text;
+        }
+      } else {
+        header.textContent = "CORONILLA DE LA MISERICORDIA";
+        subheader.textContent = `Decena ${prayerState.decadeIndex} de 5`;
+        
+        if (prayerState.beadIndex === 0) {
+          counter.textContent = "Intro de Decena: Padre Eterno";
+          cardTitle.textContent = prayers.paterno.title;
+          cardText.textContent = prayers.paterno.text;
+        } else {
+          counter.textContent = `Plegaria: Cuenta ${prayerState.beadIndex} / 10`;
+          cardTitle.textContent = prayers.pasion.title;
+          cardText.textContent = prayers.pasion.text;
+        }
+      }
+    }
+
+    function advanceBead() {
+      // Vibración de apoyo táctil si está disponible
+      if (navigator.vibrate) {
+        navigator.vibrate(30);
+      }
+
+      prayerState.beadIndex++;
+
+      if (prayerState.beadIndex > prayerState.maxBeads) {
+        // Fin de la decena
+        prayerState.beadIndex = 0;
+        prayerState.decadeIndex++;
+
+        if (prayerState.decadeIndex > 5) {
+          // Fin del rezo completo
+          showPhoneToast("¡Has completado el Rezo! Amén.");
+          resetToRosMenu();
+          return;
+        } else {
+          showPhoneToast(`Iniciando Decena ${prayerState.decadeIndex}`);
+          if (prayerState.type === 'rosario') {
+            setupRosaryBeadsUI();
+          } else {
+            setupCoronillaBeadsUI();
+          }
+        }
+      }
+
+      updateBeadsHighlight();
+      updatePrayerText();
+    }
+
+    // ==========================================
+    // INSTANCIACIÓN FINAL E INTEGRACIÓN
+    // ==========================================
+    
+    // Duplica el celular simulador en la sección interactiva principal
+    const simulatorPhoneAnchor = document.getElementById('simulator-phone-anchor');
+    const heroVisual = document.querySelector('.hero-visual');
+    const phoneContainer = document.querySelector('.phone-container');
+
+    // Movimiento responsivo del celular entre el Hero y la Sección de Consola Central
+    function adjustPhoneLocation() {
+      if (window.innerWidth <= 1024) {
+        // En móviles/tablets grandes, lo mandamos al ancla de la consola
+        if (phoneContainer.parentElement !== simulatorPhoneAnchor) {
+          simulatorPhoneAnchor.appendChild(phoneContainer);
+        }
+      } else {
+        // En pantallas grandes, regresa al lateral del Hero
+        if (phoneContainer.parentElement !== heroVisual) {
+          heroVisual.appendChild(phoneContainer);
+        }
+      }
+    }
+    
+    window.addEventListener('resize', adjustPhoneLocation);
+    adjustPhoneLocation();
+
+    // Inicializamos cargando la home
+    goHome();
+  </script>
+</body>
+</html>
